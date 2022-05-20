@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block inscription %}
+<section id="inscription-form">
+	<h1>Iscrivez-vous</h1>
+	<form method="POST">
+		{{ form.as_p }}
+		{% csrf_token %}
+		<button type="submit" >S’inscrire</button>
+	</form>
+	{{ message }}
+</section>			
+{% endblock %}}

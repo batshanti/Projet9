@@ -1,0 +1,45 @@
+#header
+{
+	display: flex;
+	width: 80%;
+	margin: auto;
+	border: solid;
+
+}
+
+#logo
+{
+	height: 150px;
+}
+
+#lien-inscription
+{
+	display: inline-block;
+	width: 40%;
+	margin-top: 100px;
+	margin-left: 10%;
+	text-align: center;
+}
+
+
+#connexion
+{
+	display: inline-block;
+	width: 40%;
+	margin-top: 100px;
+	text-align: center;
+
+}
+
+
+
+
+
+
+
+#inscription-form
+{
+	width: 80%;
+	margin: auto;
+}
+

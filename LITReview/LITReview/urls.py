@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from LITReview.views import Index, Create_User
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='adminn'),
+    path('index/', Index.as_view(), name='aaaa'),
+    path('create_user/', Create_User.as_view(), name='create'),
 ]

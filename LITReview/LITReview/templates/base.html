@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet"  href="{% static 'styles.css' %}">
+</head>
+<body>
+	<header id="header">
+	
+	<a href="index.html"> <img id="logo" src="{% static 'media/logo.png' %}" alt="logo " title="logo"></a>
+
+	
+	</header>
+
+
+{% block lien-create %}{% endblock %}
+
+{% block connexion %}{% endblock %}	
+	
+{% block inscription %}{% endblock %}
+
+</body>
+</html>
+
+
+
+
