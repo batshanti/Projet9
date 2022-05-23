@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block nav %}
 	<nav>
   		<ul>
     		<li><a href="#Accueil">Flux</a></li>
    			<li><a href="#Apropos">Posts</a></li>
-    		<li><a href="#Contact">Abonnements</a></li>
+    		<li><a href="{% url 'abonnements' %}">Abonnements</a></li>
+    		<li><a href="{% url 'logout' %}">Se déconnecter</a></li>
   		</ul>
 	</nav>
-{% endblock %}}
+{% endblock %}

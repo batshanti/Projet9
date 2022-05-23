@@ -10,17 +10,17 @@
 		<a href="{% url 'create' %}">S'inscrire</a>
 </section>
 
-{% endblock %}}
+{% endblock %}
 
 {% block connexion %}
 
 <section id="connexion">
 	<h1>Connectez-vous</h1>
-	<form>
+	<form method="POST">
 		{{ form.as_p }}
 		{% csrf_token %}
 	<button type="submit" >Connexion</button>
 	</form>
 </section>
 
-{% endblock %}}
+{% endblock %}
