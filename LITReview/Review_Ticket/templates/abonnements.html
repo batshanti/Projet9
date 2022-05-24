@@ -13,5 +13,11 @@
 
 <h2>Abonnements</h2>
 
+	{% for user in fl_user %}
+
+		<p>{{user.followed_user|upper}}</p>
+
+	{% endfor %}
+
 
 <h2>Abonnés</h2>
