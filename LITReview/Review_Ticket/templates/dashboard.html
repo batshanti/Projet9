@@ -9,5 +9,6 @@
     		<li><a href="{% url 'abonnements' %}">Abonnements</a></li>
     		<li><a href="{% url 'logout' %}">Se déconnecter</a></li>
   		</ul>
+  		<p id="userr">Utilisateur connecté: {{ user_log|upper }}</p>
 	</nav>
 {% endblock %}

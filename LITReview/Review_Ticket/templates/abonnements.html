@@ -21,3 +21,9 @@
 
 
 <h2>Abonnés</h2>
+
+	{% for user in followers %}
+
+		<p>{{user.user|upper}}</p>
+
+	{% endfor %}

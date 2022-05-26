@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from LITReview.views import Create_User
-from Review_Ticket.views import Dashboard, Abonnements
+from Review_Ticket.views import Dashboard, Abonnements, Create_ticket
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
@@ -32,4 +32,5 @@ urlpatterns = [
         template_name='logout.html'
         ), name='logout'),
     path('abonnements/', Abonnements.as_view(), name='abonnements'),
+    path('create_ticket/', Create_ticket.as_view(), name='create_ticket')
 ]
