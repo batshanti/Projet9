@@ -39,13 +39,41 @@
 	margin: auto;
 }
 
+/*abonnement*/
+
+
+#abonnements
+{
+	width: 80%;
+	margin: auto;
+}
+
 
 
 /*formulaire création ticket*/
 
-
-
-#userr
+#section_create_ticket
 {
-	background-color: red;
+	margin: auto;
+	margin-top: 80px;
+	text-align: center;
+	width: 80%;
+}
+
+#tcreate_ticket_form
+{
+	margin: auto;
+}
+
+
+#tcreate_ticket_form, label
+{
+	display: block;
+	margin-bottom: 10px;
+}
+
+#tcreate_ticket_form, input, textarea
+{
+	width: 600px;
+
 }

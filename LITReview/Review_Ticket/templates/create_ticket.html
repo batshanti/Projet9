@@ -1,10 +1,11 @@
 {% include 'dashboard.html' %}
 
-
+<section id="section_create_ticket">
 <h2>Créer un ticket</h2>
 
-	<form id="tcreate_ticket_form" method="POST">
+	<form id="tcreate_ticket_form" method="POST" enctype='multipart/form-data'>
 		{{ form.as_p }}
 		{% csrf_token %}
 		<button type="submit" >Envoyer</button>
 	</form>
+</section>
