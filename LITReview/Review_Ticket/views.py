@@ -62,7 +62,7 @@ class Create_ticket(View):
 
     def post(self, request):
         user_log = request.user.get_username()
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             user_bdd = User.objects.get(username=user_log)
             ticket = form.save(commit=False)
