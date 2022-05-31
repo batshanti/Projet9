@@ -1,0 +1,12 @@
+{% include 'dashboard.html' %}
+
+<section id="section_create_review">
+<h2>Créer une critique</h2>
+
+	<form id="tcreate_review_form" method="POST">
+		{{ form1.as_p }}
+		{{ form2.as_p }}
+		{% csrf_token %}
+		<button type="submit" >Envoyer</button>
+	</form>
+</section>

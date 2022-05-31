@@ -77,3 +77,34 @@
 	width: 600px;
 
 }
+
+/*page flux*/
+
+#lien-ticket-reviw
+{
+	margin: auto;
+	margin-top: 100px;
+	width: 80%;
+
+}
+
+#lien-ticket-reviw > a
+{
+	font-size: 25px;
+	border-radius: 30px;
+	border: solid 1px;
+	padding: 12px;
+	text-decoration: none;
+	margin-left: 15%;
+
+}
+
+/*formulaire création de critique*/
+
+#section_create_review
+{
+	margin: auto;
+	margin-top: 80px;
+	text-align: center;
+	width: 80%;
+}

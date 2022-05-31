@@ -1,21 +1,22 @@
 from django.shortcuts import render
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from Review_Ticket.forms import Folow_User, Create_ticket
-from Review_Ticket.models import UserFollows, Ticket
+from Review_Ticket.forms import Folow_User, Create_ticket, Create_Review
+from Review_Ticket.models import UserFollows, Ticket, Review
+from Review_Ticket.utils import Database
 
-
-
-class Dashboard(View):
-    template_name = 'dashboard.html'
-
-    def get(self, request):
-        user_log = request.user.get_username()
-        return render(request, self.template_name,context={'user_log': user_log})
 
 
 class Flux(View):
-    pass
+    template_name = 'flux.html'
+
+    def get(self, request):
+        user_log = request.user.get_username()
+        data = Database(user_log)
+
+        return render(request, self.template_name,context={'user_log': user_log})
+
 
 class Posts(View):
     pass
@@ -52,6 +53,7 @@ class Abonnements(View):
 class Create_ticket(View):
     template_name = 'create_ticket.html'
     form_class = Create_ticket
+    # redirect_field_name = '/'
     
 
     def get(self, request):
@@ -70,3 +72,20 @@ class Create_ticket(View):
             ticket.save()
 
         return render(request, self.template_name)
+
+class Create_Review_View(View):
+    template_name = 'create_review.html'
+    form_class = Create_Review
+    
+
+    def get(self, request):
+        form1 = Create_ticket.form_class()
+        form2 = self.form_class()
+        user_log = request.user.get_username()
+
+        return render(request, self.template_name, context={'form1': form1, 'form2': form2, 'user_log': user_log})
+
+    def post(self, request):
+        pass
+        
+        
