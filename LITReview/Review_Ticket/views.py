@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from Review_Ticket.forms import Folow_User, Create_ticket, Create_Review
+from Review_Ticket.forms import Folow_User, Create_ticket_form, Create_review_form
 from Review_Ticket.models import UserFollows, Ticket, Review
 from Review_Ticket.utils import Database
 
@@ -50,9 +50,9 @@ class Abonnements(View):
         return render(request, self.template_name)
 
 
-class Create_ticket(View):
+class Create_ticket_view(View):
     template_name = 'create_ticket.html'
-    form_class = Create_ticket
+    form_class = Create_ticket_form
     # redirect_field_name = '/'
     
 
@@ -73,19 +73,26 @@ class Create_ticket(View):
 
         return render(request, self.template_name)
 
-class Create_Review_View(View):
+class Create_review_view(View):
     template_name = 'create_review.html'
-    form_class = Create_Review
+    form_class = Create_review_form
     
 
     def get(self, request):
-        form1 = Create_ticket.form_class()
+        form1 = Create_ticket_form()
         form2 = self.form_class()
         user_log = request.user.get_username()
 
         return render(request, self.template_name, context={'form1': form1, 'form2': form2, 'user_log': user_log})
 
     def post(self, request):
-        pass
-        
-        
+        user_log = request.user.get_username()
+        form_ticket = Create_ticket_form(request.POST, request.FILES)
+        form_review = self.form_class(request.POST)
+        if form_ticket.is_valid() and form_review.is_valid():
+
+            review_ticket = Database(user_log)
+            print(review_ticket.user)
+            review_ticket.create_review_ticket(form_ticket, form_review)
+            
+        return render(request, self.template_name)

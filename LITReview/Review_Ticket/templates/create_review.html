@@ -3,7 +3,7 @@
 <section id="section_create_review">
 <h2>Créer une critique</h2>
 
-	<form id="tcreate_review_form" method="POST">
+	<form id="tcreate_review_form" method="POST" enctype='multipart/form-data'>
 		{{ form1.as_p }}
 		{{ form2.as_p }}
 		{% csrf_token %}
