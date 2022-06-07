@@ -1,0 +1,14 @@
+{% include 'dashboard.html' %}
+
+<form method="POST">
+	{% csrf_token %}
+	<h2>Voulez-vous supprimer cette demande ?</h2>
+
+	<p>Ticket - Vous</p>
+	<p>{{ ticket.title }}</p>
+	<p>{{ ticket.time_created }}</p>
+	<p>{{ ticket.description }}</p>
+	<img src="{{ ticket.image.url }}">
+	<button type="submit" >Supprimer</button>
+
+</form>

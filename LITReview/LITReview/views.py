@@ -4,7 +4,7 @@ from django.views.generic import View
 from LITReview.forms import SignupForm, LoginForm 
 
 
-class Create_User(View):
+class CreateUserView(View):
     template_name = 'CreateUser.html'
     form_class = SignupForm
 

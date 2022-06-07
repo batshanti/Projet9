@@ -10,7 +10,6 @@ class Database:
     def get_user_follow(self, name):
         pass
 
-
     def create_review_ticket(self, form_ticket, form_review):
         ticket = form_ticket.save(commit=False)
         ticket.user = self.user

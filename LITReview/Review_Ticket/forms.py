@@ -2,11 +2,11 @@ from django import forms
 from Review_Ticket.models import Ticket, Review
 
 
-class Folow_User(forms.Form):
+class FolowUserForm(forms.Form):
 
     username = forms.CharField(max_length=63, label='Nom d’utilisateur')
 
-class Create_ticket_form(forms.ModelForm):
+class CreateTicketForm(forms.ModelForm):
     
     class Meta:
         model = Ticket
@@ -16,7 +16,7 @@ class Create_ticket_form(forms.ModelForm):
             'title': 'Titre'
         }
 
-class Create_review_form(forms.ModelForm):
+class CreateReviewForm(forms.ModelForm):
     rating = forms.ChoiceField(
         widget=forms.RadioSelect(),
         choices=((1, "1 star"), (2, "2 stars"), (3, "3 stars"), (4, "4 stars"), (5, '5 stars'))
