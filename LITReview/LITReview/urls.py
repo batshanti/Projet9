@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from LITReview.views import Create_User
-from Review_Ticket.views import Flux, Abonnements, Create_ticket_view, Create_review_view
+from Review_Ticket.views import Flux, Abonnements, Create_ticket_view, Create_review_view, PostsView, UpdateTicketView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
@@ -29,13 +29,15 @@ urlpatterns = [
         redirect_authenticated_user=True
         ), name='login'),
     path('create_user/', Create_User.as_view(), name='create'),
-    path('flux/' , Flux.as_view(), name='flux'),
+    path('flux/', Flux.as_view(), name='flux'),
+    path('posts/', PostsView.as_view(), name='posts'),
     path('logout/', LogoutView.as_view(
         template_name='logout.html'
         ), name='logout'),
     path('abonnements/', Abonnements.as_view(), name='abonnements'),
     path('create_ticket/', Create_ticket_view.as_view(), name='create_ticket'),
     path('create_review/', Create_review_view.as_view(), name='create_review'),
+    path('edit_ticket/<int:pk>/', UpdateTicketView.as_view(), name='edit_ticket'),
 ]
 
 if settings.DEBUG:

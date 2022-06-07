@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import View
+from django.shortcuts import render, reverse
+from django.views.generic import View, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from Review_Ticket.forms import Folow_User, Create_ticket_form, Create_review_form
@@ -15,11 +15,19 @@ class Flux(View):
         user_log = request.user.get_username()
         data = Database(user_log)
 
-        return render(request, self.template_name,context={'user_log': user_log})
+        return render(request, self.template_name, context={'user_log': user_log})
 
 
-class Posts(View):
-    pass
+class PostsView(View):
+    template_name = "Posts.html"
+    
+    def get(self, request):
+        user_log = request.user.get_username()
+        data = Database(user_log)
+        tickets = Ticket.objects.filter(user=data.user)
+
+        return render(request, self.template_name, context={'tickets': tickets, 'user_log': user_log})
+
 
 class Abonnements(View):
     template_name = 'abonnements.html'
@@ -53,8 +61,6 @@ class Abonnements(View):
 class Create_ticket_view(View):
     template_name = 'create_ticket.html'
     form_class = Create_ticket_form
-    # redirect_field_name = '/'
-    
 
     def get(self, request):
         form = self.form_class()
@@ -70,8 +76,10 @@ class Create_ticket_view(View):
             ticket = form.save(commit=False)
             ticket.user = user_bdd
             ticket.save()
+            form = self.form_class()
+            message = "Ajout demande de critique ok"
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, context={'form': form, 'user_log': user_log, 'message': message})
 
 class Create_review_view(View):
     template_name = 'create_review.html'
@@ -96,3 +104,11 @@ class Create_review_view(View):
             review_ticket.create_review_ticket(form_ticket, form_review)
             
         return render(request, self.template_name)
+
+class UpdateTicketView(UpdateView):
+    model = Ticket
+    template_name = 'create_ticket.html'
+    form_class = Create_ticket_form
+
+    def get_success_url(self):
+        return reverse('posts')
