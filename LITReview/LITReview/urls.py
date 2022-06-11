@@ -41,5 +41,6 @@ urlpatterns = [
     path('delete_ticket/<int:pk>/', DeleteTicketView.as_view(), name='delete_ticket'),
 ]
 
+# test
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
