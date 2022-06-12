@@ -4,3 +4,10 @@
 	<a href="{% url 'create_ticket' %}">Demander une critique</a>
 	<a href="{% url 'create_review' %}">Créer une critique</a>
 </p>
+
+{% for ticket in ticket_user_follow %}
+
+
+	{% include 'ticket.html' %}
+
+{% endfor %}

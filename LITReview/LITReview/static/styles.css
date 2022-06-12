@@ -46,8 +46,23 @@
 {
 	width: 80%;
 	margin: auto;
+	text-align: center;
 }
 
+#followed_user, #followers
+{
+	width: 60%;
+	border: solid 1px black;
+	padding: 2px;
+	text-align: left;
+	margin-left: 10%;
+
+}
+
+#followed_user
+{
+	display: inline-block;
+}
 
 
 /*formulaire création ticket*/
@@ -75,7 +90,6 @@
 #tcreate_ticket_form, input, textarea
 {
 	width: 600px;
-
 }
 
 /*page flux*/
@@ -84,18 +98,20 @@
 {
 	margin: auto;
 	margin-top: 100px;
+	margin-bottom: 100px;
 	width: 80%;
 
 }
 
 #lien-ticket-reviw > a
 {
-	font-size: 25px;
+	font-size: 20px;
+	color: black;
 	border-radius: 30px;
 	border: solid 1px;
 	padding: 12px;
 	text-decoration: none;
-	margin-left: 15%;
+	margin-left: 12%;
 
 }
 
@@ -107,4 +123,45 @@
 	margin-top: 80px;
 	text-align: center;
 	width: 80%;
+}
+
+#tcreate_review_form > ul
+{
+	list-style-type: none;
+	
+}
+
+#tcreate_review_form > ul > li
+{
+
+	display: inline-block;
+	text-align: left;
+
+}
+#tcreate_review_form > ul > li > label > input
+{
+	margin: auto;
+	width: 50%;
+}
+
+/*Ticket*/
+
+#ticket
+{
+	width: 60%;
+	margin: auto;
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	border: solid 1px black;
+}
+
+#ticket > a
+{
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border: solid 1px black;
+	padding: 12px;
+	text-decoration: none;
+	color: black;
 }

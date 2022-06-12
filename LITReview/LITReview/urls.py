@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from LITReview.views import CreateUserView
-from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView
+from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView, DeleteUserFollowsView, CreateReviewFromTicketView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
@@ -39,6 +39,9 @@ urlpatterns = [
     path('create_review/', CreateReviewView.as_view(), name='create_review'),
     path('edit_ticket/<int:pk>/', UpdateTicketView.as_view(), name='edit_ticket'),
     path('delete_ticket/<int:pk>/', DeleteTicketView.as_view(), name='delete_ticket'),
+    path('delete_followed_user/<int:pk>/', DeleteUserFollowsView.as_view(), name='delete_followed_user'),
+    path('review_ticket/<int:pk>/', CreateReviewFromTicketView.as_view(), name='review_ticket'),
+
 ]
 
 # test

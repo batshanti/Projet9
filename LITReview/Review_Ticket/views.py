@@ -1,10 +1,10 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.views.generic import View, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from Review_Ticket.forms import FolowUserForm, CreateTicketForm, CreateReviewForm
 from Review_Ticket.models import UserFollows, Ticket, Review
-from Review_Ticket.utils import Database
+from Review_Ticket.utils import create_review_ticket, get_user_follow, get_ticket_user_follow, get_ticket
 
 
 
@@ -13,9 +13,11 @@ class Flux(View):
 
     def get(self, request):
         user_log = request.user.get_username()
-        data = Database(user_log)
+        user_follow = get_user_follow(user_log)
+        ticket_user_follow = get_ticket_user_follow(user_follow, user_log)
 
-        return render(request, self.template_name, context={'user_log': user_log})
+
+        return render(request, self.template_name, context={'user_log': user_log, 'ticket_user_follow': ticket_user_follow})
 
 
 class PostsView(View):
@@ -23,8 +25,8 @@ class PostsView(View):
     
     def get(self, request):
         user_log = request.user.get_username()
-        data = Database(user_log)
-        tickets = Ticket.objects.filter(user=data.user)
+        user_bdd = User.objects.get(username=user_log)
+        tickets = Ticket.objects.filter(user=user_bdd)
 
         return render(request, self.template_name, context={'tickets': tickets, 'user_log': user_log})
 
@@ -55,7 +57,8 @@ class AbonnementsView(View):
             fl_user = UserFollows.objects.create(user=user_log_bdd, followed_user=user_bdd)
             fl_user.save()
 
-        return render(request, self.template_name)
+
+        return self.get(request)
 
 
 class CreateTicketView(View):
@@ -99,10 +102,25 @@ class CreateReviewView(View):
         form_review = self.form_class(request.POST)
         if form_ticket.is_valid() and form_review.is_valid():
 
-            review_ticket = Database(user_log)
-            review_ticket.CreateReviewForm(form_ticket, form_review)
+            # review_ticket = Database(user_log)
+            create_review_ticket(user_log, form_ticket, form_review)
             
         return render(request, self.template_name)
+
+class CreateReviewFromTicketView(View):
+    template_name = 'create_review_from_ticket.html'
+    form_class = CreateReviewForm
+
+    def get(self, request, pk):
+        form = self.form_class()
+        user_log = request.user.get_username()
+        ticket = get_ticket(pk)
+        
+
+        return render(request, self.template_name, context={'form': form, 'user_log': user_log, 'ticket':ticket})         
+
+
+
 
 class UpdateTicketView(UpdateView):
     model = Ticket
@@ -118,3 +136,10 @@ class DeleteTicketView(DeleteView):
 
     def get_success_url(self):
         return reverse('posts')
+
+class DeleteUserFollowsView(DeleteView):
+    model = UserFollows
+    template_name = 'delete_userfollows.html'
+
+    def get_success_url(self):
+        return reverse('abonnements')

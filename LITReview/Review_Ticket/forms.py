@@ -19,7 +19,8 @@ class CreateTicketForm(forms.ModelForm):
 class CreateReviewForm(forms.ModelForm):
     rating = forms.ChoiceField(
         widget=forms.RadioSelect(),
-        choices=((1, "1 star"), (2, "2 stars"), (3, "3 stars"), (4, "4 stars"), (5, '5 stars'))
+        choices=((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")),
+        label='Note'
     )
 
     class Meta:
