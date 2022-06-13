@@ -37,7 +37,7 @@ def create_review_ticket(name, form_ticket, form_review):
     review.ticket = ticket
     review.headline = ticket.title
     review.user = User.objects.get(username=name)
-    review.save()
+    
 
 def get_ticket_user_follow(user_follow, user_log):
     users_follow = []
@@ -58,3 +58,10 @@ def get_ticket_user_follow(user_follow, user_log):
         tickets_follow.append(ticket)
 
     return tickets_follow
+
+def create_review_from_ticket(user_log, form_review, ticket):
+    review = form_review.save(commit=False)
+    review.ticket = ticket
+    review.user = User.objects.get(username=user_log) 
+    review.save()
+

@@ -2,9 +2,9 @@ from django.shortcuts import render, reverse, redirect
 from django.views.generic import View, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from Review_Ticket.forms import FolowUserForm, CreateTicketForm, CreateReviewForm
+from Review_Ticket.forms import FolowUserForm, CreateTicketForm, CreateReviewForm, CreateReviewTicketForm
 from Review_Ticket.models import UserFollows, Ticket, Review
-from Review_Ticket.utils import create_review_ticket, get_user_follow, get_ticket_user_follow, get_ticket
+from Review_Ticket.utils import create_review_ticket, get_user_follow, get_ticket_user_follow, get_ticket, create_review_from_ticket
 
 
 
@@ -109,16 +109,24 @@ class CreateReviewView(View):
 
 class CreateReviewFromTicketView(View):
     template_name = 'create_review_from_ticket.html'
-    form_class = CreateReviewForm
+    form_class = CreateReviewTicketForm
 
     def get(self, request, pk):
-        form = self.form_class()
-        user_log = request.user.get_username()
         ticket = get_ticket(pk)
-        
+        form = self.form_class({'headline': ticket.title})
+        user_log = request.user.get_username()
+        return render(request, self.template_name, context={'form': form, 'user_log': user_log, 'ticket':ticket})
 
-        return render(request, self.template_name, context={'form': form, 'user_log': user_log, 'ticket':ticket})         
+    def post(self, request, pk):
+        ticket = get_ticket(pk)
+        form_review = self.form_class(request.POST)
+        user_log = request.user.get_username()
+        if form_review.is_valid():
+            create_review_from_ticket(user_log, form_review, ticket)
 
+
+
+        return render(request, self.template_name)
 
 
 
