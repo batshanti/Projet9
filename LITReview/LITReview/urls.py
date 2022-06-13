@@ -18,13 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import login_required
 from LITReview.views import CreateUserView
 from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView, DeleteUserFollowsView, CreateReviewFromTicketView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
 
-    path('index/', LoginView.as_view(
+    path('', LoginView.as_view(
         template_name='index.html',
         redirect_authenticated_user=True
         ), name='login'),
@@ -35,7 +36,7 @@ urlpatterns = [
         template_name='logout.html'
         ), name='logout'),
     path('abonnements/', AbonnementsView.as_view(), name='abonnements'),
-    path('create_ticket/', CreateTicketView.as_view(), name='create_ticket'),
+    path('create_ticket/', login_required(CreateTicketView.as_view(), login_url='login'), name='create_ticket'),
     path('create_review/', CreateReviewView.as_view(), name='create_review'),
     path('edit_ticket/<int:pk>/', UpdateTicketView.as_view(), name='edit_ticket'),
     path('delete_ticket/<int:pk>/', DeleteTicketView.as_view(), name='delete_ticket'),
