@@ -3,7 +3,7 @@ from django.views.generic import View, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from Review_Ticket.forms import FolowUserForm, CreateTicketForm
-from Review_Ticket.forms import CreateReviewForm, CreateReviewTicketForm
+from Review_Ticket.forms import CreateReviewForm
 from Review_Ticket.models import UserFollows, Ticket, Review
 from Review_Ticket.utils import create_review_ticket, get_user_follow
 from Review_Ticket.utils import get_ticket_user_follow, get_ticket
@@ -132,19 +132,19 @@ class CreateReviewView(View):
         form_ticket = CreateTicketForm(request.POST, request.FILES)
         form_review = self.form_class(request.POST)
         if form_ticket.is_valid() and form_review.is_valid():
-
             create_review_ticket(user_log, form_ticket, form_review)
 
-        return render(request, self.template_name)
+
+        return self.get(request)
 
 
 class CreateReviewFromTicketView(View):
     template_name = 'create_review_from_ticket.html'
-    form_class = CreateReviewTicketForm
+    form_class = CreateReviewForm
 
     def get(self, request, pk):
         ticket = get_ticket(pk)
-        form = self.form_class({'headline': ticket.title})
+        form = self.form_class()
         user_log = request.user.get_username()
         return render(
             request,
@@ -160,7 +160,7 @@ class CreateReviewFromTicketView(View):
 
             create_review_from_ticket(user_log, form_review, ticket)
 
-        return render(request, self.template_name)
+        return redirect('flux')
 
 
 class UpdateTicketView(UpdateView):

@@ -4,7 +4,9 @@
 <h2>Créer une critique</h2>
 
 	<form id="tcreate_review_form" method="POST" enctype='multipart/form-data'>
+		<h3>Livre / Article</h3>
 		{{ form1.as_p }}
+		<h3>Critique</h3>
 		{{ form2.as_p }}
 		{% csrf_token %}
 		<button type="submit" >Envoyer</button>

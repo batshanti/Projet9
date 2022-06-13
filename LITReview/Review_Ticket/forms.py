@@ -25,22 +25,6 @@ class CreateReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('rating', 'body')
-        labels = {
-
-            'rating': 'Note',
-            'body': 'Commentaire',
-        }
-
-class CreateReviewTicketForm(forms.ModelForm):
-    rating = forms.ChoiceField(
-        widget=forms.RadioSelect(),
-        choices=((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")),
-        label='Note'
-    )
-
-    class Meta:
-        model = Review
         fields = ('headline', 'rating', 'body')
         labels = {
 
@@ -52,3 +36,20 @@ class CreateReviewTicketForm(forms.ModelForm):
 
             'body': forms.Textarea,
         }
+
+# class CreateReviewTicketForm(forms.ModelForm):
+#     rating = forms.ChoiceField(
+#         widget=forms.RadioSelect(),
+#         choices=((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")),
+#         label='Note'
+#     )
+
+#     class Meta:
+#         model = Review
+#         fields = ('headline', 'rating', 'body')
+#         labels = {
+
+#             'headline': 'Titre',
+#             'rating': 'Note',
+#             'body': 'Commentaire',
+#         }

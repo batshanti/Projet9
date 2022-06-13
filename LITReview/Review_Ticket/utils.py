@@ -18,8 +18,8 @@ def create_review_ticket(name, form_ticket, form_review):
     ticket.save()
     review = form_review.save(commit=False)
     review.ticket = ticket
-    review.headline = ticket.title
     review.user = User.objects.get(username=name)
+    review.save()
 
 
 def get_ticket_user_follow(user_follow, user_log):

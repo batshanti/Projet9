@@ -39,6 +39,32 @@
 	margin: auto;
 }
 
+
+/*liens de navigation*/
+#nav
+{
+	width: 100%;
+	text-align: right;
+}
+
+#nav > ul
+{
+	list-style-type: none;
+}
+
+#nav > ul > li
+{
+	display: inline-block;
+	text-align: left;
+	margin-right: 15px;
+}
+
+#nav > p
+{
+	margin-top: 7%;
+	margin-right: 15px;
+}
+
 /*abonnement*/
 
 
@@ -92,6 +118,11 @@
 	width: 600px;
 }
 
+#tcreate_ticket_form > button
+{
+	margin-bottom: 100px;
+}
+
 /*page flux*/
 
 #lien-ticket-reviw
@@ -143,6 +174,11 @@
 {
 	margin: auto;
 	width: 50%;
+}
+
+#tcreate_review_form > h3
+{
+	text-align: left;
 }
 
 /*Ticket*/
