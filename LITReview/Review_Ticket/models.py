@@ -22,7 +22,6 @@ class Ticket(models.Model):
             img.save(self.image.path)
 
 
-
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
