@@ -44,9 +44,8 @@ class UserFollows(models.Model):
     def get_user_follow(user_log):
         user_bdd = User.objects.get(username=user_log)
         return UserFollows.objects.filter(user=user_bdd)
-    
+
     @staticmethod
     def get_followers(user_log):
         user_bdd = User.objects.get(username=user_log)
         return UserFollows.objects.filter(followed_user=user_bdd)
-

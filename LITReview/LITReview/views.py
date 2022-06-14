@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from LITReview.forms import SignupForm, LoginForm 
+from LITReview.forms import SignupForm, LoginForm
 
 
 class CreateUserView(View):
@@ -19,5 +19,9 @@ class CreateUserView(View):
             return redirect('index')
         else:
             message = "Invalide"
-            
-        return render(request, self.template_name, context={'form': form, 'message': message})
+
+    return render(
+        request,
+        self.template_name,
+        context={'form': form, 'message': message}
+    )

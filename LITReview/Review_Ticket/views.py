@@ -34,11 +34,10 @@ class Flux(View):
             request,
             self.template_name,
             context={
-            'posts': posts,
-            'user_log': user_log,
+                'posts': posts,
+                'user_log': user_log,
             }
         )
-
 
 
 class PostsView(View):
@@ -64,8 +63,8 @@ class PostsView(View):
             request,
             self.template_name,
             context={
-            'posts': posts,
-            'user_log': user_log,
+                'posts': posts,
+                'user_log': user_log,
             }
         )
 
@@ -161,7 +160,6 @@ class CreateReviewView(View):
         if form_ticket.is_valid() and form_review.is_valid():
             create_review_ticket(user_log, form_ticket, form_review)
 
-
         return self.get(request)
 
 
@@ -227,6 +225,6 @@ class UpdateReviewView(UpdateView):
 class DeleteReviewView(DeleteView):
     model = Review
     template_name = 'delete_review.html'
-        
+
     def get_success_url(self):
         return reverse('posts')
