@@ -2,7 +2,11 @@
 <article id="ticket">
 
 	
+{% if ticket.user == user %}
+	<p>TICKET - Vous >>> {{ ticket.time_created }}</p>
+{% else %}	
 	<p>TICKET - {{ ticket.user }}  >>> {{ ticket.time_created }}</p>
+{% endif %}	
 	
 
 

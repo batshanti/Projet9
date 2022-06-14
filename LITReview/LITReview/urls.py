@@ -5,7 +5,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from LITReview.views import CreateUserView
-from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView, DeleteUserFollowsView, CreateReviewFromTicketView
+from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView, DeleteUserFollowsView, CreateReviewFromTicketView, UpdateReviewView, DeleteReviewView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
@@ -67,6 +67,16 @@ urlpatterns = [
         login_required(CreateReviewFromTicketView.as_view(), login_url='login'),
         name='review_ticket'
     ),
+    path(
+        'edit_review/<int:pk>/',
+        login_required(UpdateReviewView.as_view(), login_url='login'),
+        name='edit_review'
+    ),
+    path(
+        'delete_review/<int:pk>/',
+        login_required(DeleteReviewView.as_view(), login_url='login'),
+        name='delete_review'
+    )
 ]
 
 if settings.DEBUG:

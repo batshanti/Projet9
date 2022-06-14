@@ -35,12 +35,16 @@ class PostsView(View):
         user_log = request.user.get_username()
         user_bdd = User.objects.get(username=user_log)
         tickets = Ticket.objects.filter(user=user_bdd)
-
+        reviews = Review.objects.filter(user=user_bdd)
         return render(
             request,
             self.template_name,
-            context={'tickets': tickets, 'user_log': user_log}
-            )
+            context={
+            'tickets': tickets,
+            'user_log': user_log,
+            'reviews': reviews
+            }
+        )
 
 
 class AbonnementsView(View):
@@ -186,3 +190,20 @@ class DeleteUserFollowsView(DeleteView):
 
     def get_success_url(self):
         return reverse('abonnements')
+
+
+class UpdateReviewView(UpdateView):
+    model = Review
+    template_name = 'update_review.html'
+    form_class = CreateReviewForm
+
+    def get_success_url(self):
+        return reverse('posts')
+
+
+class DeleteReviewView(DeleteView):
+    model = Review
+    template_name = 'delete_review.html'
+        
+    def get_success_url(self):
+        return reverse('posts')

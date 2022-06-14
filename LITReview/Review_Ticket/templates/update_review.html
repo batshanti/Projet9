@@ -1,0 +1,13 @@
+{% include 'dashboard.html' %}
+
+{% include 'ticket2.html' with ticket=review.ticket %}
+
+<section id="section_create_review">
+<h2>Modifier une critique</h2>
+
+	<form id="tcreate_review_form" method="POST">
+		{{ form.as_p }}
+		{% csrf_token %}
+		<button type="submit" >Envoyer</button>
+	</form>
+</section>

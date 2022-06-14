@@ -202,3 +202,25 @@
 	text-decoration: none;
 	color: black;
 }
+
+/*Review*/
+
+#review
+{
+	width: 60%;
+	margin: auto;
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	border: solid 1px black;
+}
+
+#review > a
+{
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border: solid 1px black;
+	padding: 12px;
+	text-decoration: none;
+	color: black;
+}
