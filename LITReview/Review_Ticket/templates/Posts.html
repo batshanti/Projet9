@@ -1,15 +1,15 @@
 {% include 'dashboard.html' %}
 
+{% for post in posts %}
 
-{% for ticket in tickets %}
+    {% if post.content_type == 'TICKET' %}
 
+        {% include 'ticket.html' with ticket=post %}
 
-	{% include 'ticket.html' %}
+    {% elif post.content_type == 'REVIEW' %}
 
-{% endfor %}
+        {% include 'review.html' with review=post%}
 
-{% for review in reviews %}
-
-	{% include 'review.html' %}
+    {% endif %}   
 
 {% endfor %}

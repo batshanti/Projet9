@@ -1,13 +1,15 @@
+from itertools import chain
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import View, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models import CharField, Value
 from Review_Ticket.forms import FolowUserForm, CreateTicketForm
 from Review_Ticket.forms import CreateReviewForm
 from Review_Ticket.models import UserFollows, Ticket, Review
 from Review_Ticket.utils import create_review_ticket, get_user_follow
 from Review_Ticket.utils import get_ticket_user_follow, get_ticket
-from Review_Ticket.utils import create_review_from_ticket
+from Review_Ticket.utils import create_review_from_ticket, get_review_user_follow
 
 
 class Flux(View):
@@ -16,16 +18,27 @@ class Flux(View):
     def get(self, request):
         user_log = request.user.get_username()
         user_follow = get_user_follow(user_log)
-        ticket_user_follow = get_ticket_user_follow(user_follow, user_log)
+        tickets = get_ticket_user_follow(user_follow, user_log)
+        reviews = get_review_user_follow(user_follow, user_log)
+
+        tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+        reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+        posts = sorted(
+            chain(reviews, tickets),
+            key=lambda post: post.time_created,
+            reverse=True
+        )
 
         return render(
             request,
             self.template_name,
             context={
-                    'user_log': user_log,
-                    'ticket_user_follow': ticket_user_follow
-                }
+            'posts': posts,
+            'user_log': user_log,
+            }
         )
+
 
 
 class PostsView(View):
@@ -35,14 +48,24 @@ class PostsView(View):
         user_log = request.user.get_username()
         user_bdd = User.objects.get(username=user_log)
         tickets = Ticket.objects.filter(user=user_bdd)
+        print(tickets)
         reviews = Review.objects.filter(user=user_bdd)
+
+        reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+        tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+
+        posts = sorted(
+            chain(reviews, tickets),
+            key=lambda post: post.time_created,
+            reverse=True
+        )
+
         return render(
             request,
             self.template_name,
             context={
-            'tickets': tickets,
+            'posts': posts,
             'user_log': user_log,
-            'reviews': reviews
             }
         )
 
