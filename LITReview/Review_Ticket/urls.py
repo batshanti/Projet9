@@ -5,7 +5,7 @@ from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateR
 urlpatterns = [
     path(
         'flux/',
-        login_required(Flux.as_view(),login_url='login'),
+        login_required(Flux.as_view(), login_url='login'),
         name='flux'
     ),
     path(
@@ -45,7 +45,8 @@ urlpatterns = [
     ),
     path(
         'review_ticket/<int:pk>/',
-        login_required(CreateReviewFromTicketView.as_view(), login_url='login'),
+        login_required(CreateReviewFromTicketView.as_view(),
+                       login_url='login'),
         name='review_ticket'
     ),
     path(

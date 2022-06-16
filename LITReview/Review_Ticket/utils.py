@@ -3,6 +3,7 @@ from Review_Ticket.models import UserFollows, Ticket, Review
 from django.contrib.auth.models import User
 from django.db.models import CharField, Value
 
+
 def get_ticket(pk):
     ticket = Ticket.objects.get(pk=pk)
     return ticket
@@ -24,23 +25,43 @@ def create_review_ticket(name, form_ticket, form_review):
 
 
 def get_ticket_user_follow(user_follow, user_log):
+    """Get all follower's reviews
+
+    Args:
+        user_follow (TYPE): Description
+        user_log (TYPE): Description
+
+    Returns:
+       obj QuerySet: Tickets
+    """
     users_follow = []
     for user in user_follow:
         users_follow.append(user.followed_user.id)
 
     user_bdd = User.objects.get(username=user_log)
-    tickets = Ticket.objects.filter(user__in=users_follow) | Ticket.objects.filter(user=user_bdd)
-    
+    tickets = Ticket.objects.filter(
+        user__in=users_follow) | Ticket.objects.filter(user=user_bdd)
+
     return tickets
 
 
 def get_review_user_follow(user_follow, user_log):
+    """Get all follower's reviews
+
+    Args:
+        user_follow (TYPE): Description
+        user_log (TYPE): Description
+
+    Returns:
+       obj QuerySet: Reviews
+    """
     users_follow = []
     for user in user_follow:
         users_follow.append(user.followed_user.id)
 
-    user_bdd = User.objects.get(username=user_log)    
-    reviews = Review.objects.filter(user__in=users_follow) | Review.objects.filter(user=user_bdd)
+    user_bdd = User.objects.get(username=user_log)
+    reviews = Review.objects.filter(
+        user__in=users_follow) | Review.objects.filter(user=user_bdd)
 
     return reviews
 
@@ -50,4 +71,3 @@ def create_review_from_ticket(user_log, form_review, ticket):
     review.ticket = ticket
     review.user = User.objects.get(username=user_log)
     review.save()
-
