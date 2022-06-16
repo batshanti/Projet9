@@ -1,7 +1,6 @@
 from itertools import chain
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import View, UpdateView, CreateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import CharField, Value
 from Review_Ticket.forms import FolowUserForm, CreateTicketForm
@@ -13,6 +12,14 @@ from Review_Ticket.utils import create_review_from_ticket, get_review_user_follo
 
 
 class Flux(View):
+
+    """Class-based views used to display user flux
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = 'flux.html'
 
     def get(self, request):
@@ -41,6 +48,14 @@ class Flux(View):
 
 
 class PostsView(View):
+
+    """Class-based views used to display user posts
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = "Posts.html"
 
     def get(self, request):
@@ -70,6 +85,14 @@ class PostsView(View):
 
 
 class AbonnementsView(View):
+
+    """Class-based views used to manage followers
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = 'abonnements.html'
     form_class = FolowUserForm
 
@@ -106,6 +129,14 @@ class AbonnementsView(View):
 
 
 class CreateTicketView(View):
+
+    """Class-based views used to Create ticket
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = 'create_ticket.html'
     form_class = CreateTicketForm
 
@@ -139,6 +170,14 @@ class CreateTicketView(View):
 
 
 class CreateReviewView(View):
+
+    """Class-based views used to create review
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = 'create_review.html'
     form_class = CreateReviewForm
 
@@ -164,6 +203,14 @@ class CreateReviewView(View):
 
 
 class CreateReviewFromTicketView(View):
+
+    """Class-based views used to create review from existing ticket
+
+    Attributes:
+        form_class : Class name used to create form
+        template_name (str): html file name for template
+    """
+
     template_name = 'create_review_from_ticket.html'
     form_class = CreateReviewForm
 
@@ -189,6 +236,15 @@ class CreateReviewFromTicketView(View):
 
 
 class UpdateTicketView(UpdateView):
+
+    """class-based generic views (Update)
+
+    Attributes:
+        form_class : Class name used to create form
+        model : Model class name
+        template_name (str): html file name for template
+    """
+
     model = Ticket
     template_name = 'create_ticket.html'
     form_class = CreateTicketForm
@@ -198,6 +254,14 @@ class UpdateTicketView(UpdateView):
 
 
 class DeleteTicketView(DeleteView):
+
+    """class-based generic views (Delete)
+
+    Attributes:
+        model : Model class name
+        template_name (str): html file name for template
+    """
+
     model = Ticket
     template_name = 'delete_ticket.html'
 
@@ -206,6 +270,14 @@ class DeleteTicketView(DeleteView):
 
 
 class DeleteUserFollowsView(DeleteView):
+
+    """class-based generic views (Delete)
+
+    Attributes:
+        model : Model class name
+        template_name (str): html file name for template
+    """
+
     model = UserFollows
     template_name = 'delete_userfollows.html'
 
@@ -214,6 +286,13 @@ class DeleteUserFollowsView(DeleteView):
 
 
 class UpdateReviewView(UpdateView):
+    """class-based generic views (Update)
+
+    Attributes:
+        model : Model class name
+        template_name (str): html file name for template
+        form_class : Class name used to create form
+    """
     model = Review
     template_name = 'update_review.html'
     form_class = CreateReviewForm
@@ -223,6 +302,14 @@ class UpdateReviewView(UpdateView):
 
 
 class DeleteReviewView(DeleteView):
+
+    """class-based generic views (Delete)
+
+    Attributes:
+        model : Model class name
+        template_name (str): html file name for template
+    """
+
     model = Review
     template_name = 'delete_review.html'
 
