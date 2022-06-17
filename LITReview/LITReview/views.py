@@ -20,8 +20,8 @@ class CreateUserView(View):
         else:
             message = "Invalide"
 
-    return render(
-        request,
-        self.template_name,
-        context={'form': form, 'message': message}
-    )
+        return render(
+            request,
+            self.template_name,
+            context={'form': form, 'message': message}
+        )
