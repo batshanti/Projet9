@@ -1,6 +1,19 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
-from Review_Ticket.views import Flux, AbonnementsView, CreateTicketView, CreateReviewView, PostsView, UpdateTicketView, DeleteTicketView, DeleteUserFollowsView, CreateReviewFromTicketView, UpdateReviewView, DeleteReviewView
+from Review_Ticket.views import (
+    Flux,
+    AbonnementsView,
+    CreateTicketView,
+    CreateReviewView,
+    PostsView,
+    UpdateTicketView,
+    DeleteTicketView,
+    DeleteUserFollowsView,
+    CreateReviewFromTicketView,
+    UpdateReviewView,
+    DeleteReviewView
+)
+
 
 urlpatterns = [
     path(

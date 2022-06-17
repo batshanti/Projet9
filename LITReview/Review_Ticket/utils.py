@@ -99,3 +99,8 @@ def create_review_from_ticket(user_log, form_review, ticket):
     review.ticket = ticket
     review.user = User.objects.get(username=user_log)
     review.save()
+
+
+def get_followers(user_log):
+    user_bdd = User.objects.get(username=user_log)
+    return UserFollows.objects.filter(followed_user=user_bdd)

@@ -6,10 +6,15 @@ from django.db.models import CharField, Value
 from Review_Ticket.forms import FolowUserForm, CreateTicketForm
 from Review_Ticket.forms import CreateReviewForm
 from Review_Ticket.models import UserFollows, Ticket, Review
-from Review_Ticket.utils import create_review_ticket, get_user_follow
-from Review_Ticket.utils import get_ticket_user_follow, get_ticket
-from Review_Ticket.utils import create_review_from_ticket
-from Review_Ticket.utils import get_review_user_follow
+from Review_Ticket.utils import (
+    create_review_ticket,
+    get_user_follow,
+    get_ticket_user_follow,
+    get_ticket,
+    create_review_from_ticket,
+    get_review_user_follow,
+    get_followers
+)
 
 
 class Flux(View):
@@ -94,8 +99,8 @@ class AbonnementsView(View):
     def get(self, request):
         form = self.form_class()
         user_log = request.user.get_username()
-        fl_user = UserFollows.get_user_follow(user_log)
-        followers = UserFollows.get_followers(user_log)
+        fl_user = get_user_follow(user_log)
+        followers = get_followers(user_log)
 
         return render(
             request,

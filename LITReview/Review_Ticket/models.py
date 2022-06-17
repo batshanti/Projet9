@@ -34,18 +34,16 @@ class Review(models.Model):
 
 
 class UserFollows(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-    followed_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followed_by')
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following'
+    )
+    followed_user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='followed_by'
+    )
 
     class Meta:
         unique_together = ('user', 'followed_user')
-
-    @staticmethod
-    def get_user_follow(user_log):
-        user_bdd = User.objects.get(username=user_log)
-        return UserFollows.objects.filter(user=user_bdd)
-
-    @staticmethod
-    def get_followers(user_log):
-        user_bdd = User.objects.get(username=user_log)
-        return UserFollows.objects.filter(followed_user=user_bdd)
