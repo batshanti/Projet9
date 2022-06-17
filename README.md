@@ -32,15 +32,15 @@ pip install -r requirements.txt
 ````
 python manage.py runserver
 ````
-
-Utilisateur de test : 
-
-tom > Password#1
-greg > Password#2
-lily > Password#3
-
 ##  Lancement de l'application web
+Se rendre sur un navigateur web et entrer l'url :
+http://127.0.0.1:8000/
 
+La base de donnée est déjà présente et possède plusieurs utilisateurs, demande de critique et avis.
 
-
-
+#### Utilisateur de test : 
+| Utilisateur | Mot de passse |
+|--|--|
+| tom | Password#1 |
+| greg| Password#2 |
+| lily| Password#3 |
