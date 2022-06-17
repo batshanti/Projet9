@@ -33,13 +33,14 @@ pip install -r requirements.txt
 python manage.py runserver
 ````
 
-##  Lancement de l'application web
-
-
-
-
 Utilisateur de test : 
 
 tom > Password#1
 greg > Password#2
 lily > Password#3
+
+##  Lancement de l'application web
+
+
+
+
