@@ -31,7 +31,10 @@
 
 }
 
-
+#connexion > form > p > input
+{
+	width: 100%;
+}
 
 #inscription-form
 {
