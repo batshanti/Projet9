@@ -9,8 +9,13 @@
 
 	<h3>{{ review.headline }}</h3>
 	<p>{{ review.body }}</p>
-	<p>Note : {{review.rating}}/5</p>
-
+	<p>Note : {{review.rating}}/5  > 
+		{% for i in stars %}
+			{% if i < review.rating %}
+				<span id="stars">&#x2605;</span>
+			{% endif %}
+		{% endfor %}
+	</p>	
 	{% include 'ticket2.html' with ticket=review.ticket %}
 
 {% if review.user == user %}

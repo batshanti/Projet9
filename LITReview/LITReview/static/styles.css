@@ -191,6 +191,7 @@
 	width: 60%;
 	margin: auto;
 	margin-top: 10px;
+	margin-bottom: 30px;
 	padding-left: 10px;
 	padding-bottom: 20px;
 	border: solid 1px black;
@@ -226,4 +227,10 @@
 	padding: 12px;
 	text-decoration: none;
 	color: black;
+}
+
+#stars
+{
+	color: yellow;
+	font-size: 1.5em;
 }

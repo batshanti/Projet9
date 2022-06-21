@@ -34,7 +34,7 @@ class Flux(View):
 
         tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
         reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
-
+        stars = [0, 1, 2, 3, 4, 5]
         posts = sorted(
             chain(reviews, tickets),
             key=lambda post: post.time_created,
@@ -47,6 +47,7 @@ class Flux(View):
             context={
                 'posts': posts,
                 'user_log': user_log,
+                'stars': stars
             }
         )
 
