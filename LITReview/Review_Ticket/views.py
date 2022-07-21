@@ -67,7 +67,7 @@ class PostsView(View):
         tickets = Ticket.objects.filter(user=user_bdd)
         print(tickets)
         reviews = Review.objects.filter(user=user_bdd)
-
+        stars = [0, 1, 2, 3, 4, 5]
         reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
         tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
@@ -83,6 +83,7 @@ class PostsView(View):
             context={
                 'posts': posts,
                 'user_log': user_log,
+                'stars': stars
             }
         )
 
@@ -262,6 +263,11 @@ class DeleteTicketView(DeleteView):
     model = Ticket
     template_name = 'delete_ticket.html'
 
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
+
     def get_success_url(self):
         return reverse('posts')
 
@@ -275,6 +281,11 @@ class DeleteUserFollowsView(DeleteView):
     """
     model = UserFollows
     template_name = 'delete_userfollows.html'
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
 
     def get_success_url(self):
         return reverse('abonnements')
@@ -292,6 +303,11 @@ class UpdateReviewView(UpdateView):
     template_name = 'update_review.html'
     form_class = CreateReviewForm
 
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
+
     def get_success_url(self):
         return reverse('posts')
 
@@ -305,6 +321,11 @@ class DeleteReviewView(DeleteView):
     """
     model = Review
     template_name = 'delete_review.html'
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
 
     def get_success_url(self):
         return reverse('posts')
