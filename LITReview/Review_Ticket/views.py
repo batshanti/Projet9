@@ -243,6 +243,11 @@ class UpdateTicketView(UpdateView):
     template_name = 'create_ticket.html'
     form_class = CreateTicketForm
 
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
+
     def get_success_url(self):
         return reverse('posts')
 
