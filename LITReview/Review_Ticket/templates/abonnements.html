@@ -15,7 +15,11 @@
 
 	{% for user in fl_user %}
 
-		<p>{{user.followed_user|upper}}</p>
+		<p id="followed_user">{{user.followed_user|upper}}</p>
+
+
+		<a href="{% url 'delete_followed_user' user.pk %}">Désabonner</a>
+
 
 	{% endfor %}
 
@@ -24,7 +28,7 @@
 
 	{% for user in followers %}
 
-		<p>{{user.user|upper}}</p>
+		<p id="followers">{{user.user|upper}}</p>
 
 	{% endfor %}
 

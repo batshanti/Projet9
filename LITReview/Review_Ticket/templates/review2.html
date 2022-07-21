@@ -1,0 +1,15 @@
+<article id="review">
+
+{% if review.user == user %}
+	<p>Vous avez publié une critique >>> {{ review.time_created }}</p>
+{% else %}	
+	<p>{{ review.user }} a publié une critique  >>> {{ review.time_created }}</p>
+{% endif %}	
+
+
+	<h3>{{ review.headline }}</h3>
+	<p>{{ review.body }}</p>
+	<p>Note : {{review.rating}}/5</p>
+
+
+</article>

@@ -1,0 +1,14 @@
+{% include 'dashboard.html' %}
+
+
+<section id="section_create_review">
+<h2>Voulez-vous supprimer cette critique ?</h2>
+
+	
+{% include 'review2.html' %}
+
+	<form id="tcreate_review_form" method="POST">
+		{% csrf_token %}
+		<button type="submit" >Supprimer</button>
+	</form>
+</section>

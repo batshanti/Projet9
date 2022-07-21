@@ -1,0 +1,9 @@
+{% include 'dashboard.html' %}
+
+<form method="POST">
+	{% csrf_token %}
+	<h2>Ne plus suivre {{object.followed_user|upper}} ?</h2>
+	<p>{{user.followed_user}}</p>
+	<button type="submit" >OK</button>
+
+</form>

@@ -10,7 +10,7 @@
 <body>
 <header id="header">
 	
-	<a href="index.html"> <img id="logo" src="{% static 'media/logo.png' %}" alt="logo " title="logo"></a>
+	<a href="{% url 'login' %}"> <img id="logo" src="{% static 'media/logo.png' %}" alt="logo " title="logo"></a>
 
 	{% block nav %}{% endblock %}
 

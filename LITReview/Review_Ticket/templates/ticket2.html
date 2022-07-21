@@ -1,22 +1,18 @@
 
 <article id="ticket">
 
+	
 {% if ticket.user == user %}
 	<p>TICKET - Vous >>> {{ ticket.time_created }}</p>
 {% else %}	
 	<p>TICKET - {{ ticket.user }}  >>> {{ ticket.time_created }}</p>
 {% endif %}	
+	
 
 
 	<h2>{{ ticket.title }}</h2>
 	<p>{{ ticket.description }}</p>
 	<img src="{{ ticket.image.url }}">
 
-{% if ticket.user == user %}
-	<a href="{% url 'edit_ticket' ticket.pk %}">Modifier</a>
-	<a href="{% url 'delete_ticket' ticket.pk %}">Supprimer</a>
-{% else %}
-	<a href="{% url 'review_ticket' ticket.pk %}">Créer une critique</a>
-{% endif %}
 
 </article>
