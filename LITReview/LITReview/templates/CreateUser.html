@@ -8,7 +8,9 @@
 		{{ form.as_p }}
 		{% csrf_token %}
 		<button type="submit" >S’inscrire</button>
+		<a id="return" href="{% url 'flux' %}">Retour</a>
 	</form>
 	{{ message }}
 </section>			
 {% endblock %}
+
