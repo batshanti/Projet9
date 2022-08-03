@@ -22,7 +22,7 @@ class CreateUserView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('login')
         else:
             message = "Invalide"
 

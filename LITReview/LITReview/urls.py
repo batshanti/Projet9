@@ -9,7 +9,7 @@ from LITReview.views import CreateUserView
 urlpatterns = [
     path('admin/', admin.site.urls, name='adminn'),
     path(
-        'index/',
+        '',
         LoginView.as_view(
             template_name='index.html',
             redirect_authenticated_user=True
